@@ -1,0 +1,44 @@
+const puppeteer = require('puppeteer'); //
+const SamokatUrl = 'https://d2203828-f43e-4556-9555-b533b4d8b781.serverhub.praktikum-services.ru/'//'ServerUrl'
+
+async function testSamokat() 
+{const browser = await puppeteer.launch({executablePath:'C:/Users/ASUS/AppData/Local/Yandex/YandexBrowser/Application/browser.exe ,headless:false, slowMo:50}); // Запуск браузера без головы и с задержкой
+const page = await browser.newPage(); // Создание вкладки
+await page.goto(SamokatUrl); // Переход по ссылке URL_Test
+const buttonCookie = await page.$('button[class="App_CookieButton__3cvqF"]'); //Кнопка Куки
+await buttonCookie.click();
+const buttonOrder = await page.$('button[class="Button_Button__ra12g"]'); // Кнопка Заказать
+await buttonOrder.click();
+//await page.waitForNavigation(); 
+const nameInput = await page.$('input[placeholder="* Имя"]'); //Поиск поля Имя и запись
+await nameInput.type('Иван');
+const surnameInput = await page.$('input[placeholder="* Фамилия"]'); //Поиск поля Фамилия и запись
+await surnameInput.type('Петров');
+const addressInput = await page.$('input[placeholder="* Адрес: куда привезти заказ"]'); //Поиск поля Адрес и запись 
+await addressInput.type('Февраль');
+const metroInput = await page.$('input[placeholder="* Станция метро"]');//Поиск поля Станция метро, клик саджеста 
+await metroInput.click();
+const sudjestMetro = await page.$('div[class="select-search__select"]');
+await sudjestMetro.click();
+const telefonInput = await page.$('input[placeholder="* Телефон: на него позвонит курьер"]'); //Поиск поля Телефон, ввод
+await telefonInput.type('+1029384756');
+const buttonDalshe = await page.$('button[class="Button_Button__ra12g Button_Middle__1CSJM"]');//Кнопка Дальше
+await buttonDalshe.click();
+//await page.waitForNavigation(); //Ожидание формы Про аренду
+const dataInput = await page.$('input[placeholder="* Когда привезти самокат"]');//Поле дата, выбор даты
+await dataInput.click();
+const data = await page.$('div[class="react-datepicker__day react-datepicker__day--020"]');
+await data.click();
+const periodInput = await page.$('div[class="Dropdown-control"]');//Поле Срок аренды, выбор срока
+await periodInput.click();
+const period = await page.$('div[class="Dropdown-menu"]>div[class="Dropdown-option"]:nth-child(2)');
+await period.click('двое суток');
+const color = await page.$('input[id="black"]');//Чек-бокс Цвет, отметка
+await color.click();
+const order = await page.$('button[class="Button_Button__ra12g Button_Middle__1CSJM"]');//Кнопка Заказать
+await order.click();
+await page.waitForSelector('div[class="Order_Modal__YZ-d3"]');
+const approve = await page.$('button[class="Button_Button__ra12g Button_Middle__1CSJM"]');//Кнопка Да в окне Хотите оформить заказ?
+await approve.click();
+}
+testSamokat();
