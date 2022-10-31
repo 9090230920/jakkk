@@ -14,9 +14,9 @@ import java.time.Duration;
 public class Main {
     public static void main(String[] args) throws InterruptedException
     {
-        System.setProperty("webdriver.chrome.driver", "D:\\selenium-java-4.5.3\\Driver104\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.setBinary("C:\\Users\\ASUS\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
+        options.setBinary("Yandex\\YandexBrowser\\Application\\browser.exe");
         WebDriver gdriver = new ChromeDriver(options);
 
         gdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10000));
